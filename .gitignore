@@ -1,0 +1,23 @@
+# Firebase — project identity and cache (never commit)
+.firebaserc
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+firestore-debug.log
+ui-debug.log
+
+# Environment / secrets
+.env
+.env.*
+*.secret
+*.key
+
+# Ads config (AdSense publisher IDs stay local only)
+ads.txt
+ads-config.js
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+*.swp
