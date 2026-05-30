@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fitness Calculator — BMI, Calories, Macros | Arithmex</title>
+  <meta name="description" content="Free fitness calculators: BMI, daily calorie needs (TDEE), macro split, max heart rate and one-rep max. Instant results, no sign-up." />
+  <meta name="keywords" content="BMI calculator, calorie calculator, macro calculator, TDEE calculator, one rep max, fitness calculator" />
+  <link rel="canonical" href="https://yourusername.github.io/arithmex/calculators/fitness-calculator.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- GOOGLE ADSENSE -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">A</div>Arithmex</a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="universal-calculator.html">Universal</a></li>
+          <li><a href="finance-calculator.html">Finance</a></li>
+          <li><a href="fitness-calculator.html" class="active">Fitness</a></li>
+          <li><a href="health-calculator.html">Health</a></li>
+          <li><a href="time-calculator.html">Time</a></li>
+          <li><a href="unit-converter.html">Converter</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☀️</span></button>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- GOOGLE AD SPACE -->
+  <div class="container" style="padding-top:1rem;">
+    <div class="ad-space ad-space-leaderboard"><span class="ad-label">Advertisement</span><span>728×90 Leaderboard</span></div>
+  </div>
+  <!-- /GOOGLE AD SPACE -->
+
+  <main class="calc-page">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><span class="breadcrumb-sep">›</span><span>Fitness Calculator</span>
+      </div>
+      <div class="calc-page-header">
+        <h1 class="page-title"><span>🏋️</span> Fitness Calculator</h1>
+        <p class="page-desc">BMI, calories (TDEE), macronutrient split, max heart rate and one-rep max — all in one tool.</p>
+      </div>
+
+      <div class="calc-layout">
+        <div class="calc-main">
+
+          <div class="panel" data-tabs>
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="tab-bmi">BMI</button>
+              <button class="tab-btn" data-tab="tab-calories">Calories (TDEE)</button>
+              <button class="tab-btn" data-tab="tab-macros">Macros</button>
+              <button class="tab-btn" data-tab="tab-hr">Heart Rate</button>
+              <button class="tab-btn" data-tab="tab-orm">One-Rep Max</button>
+            </div>
+
+            <!-- ── BMI ── -->
+            <div id="tab-bmi" class="tab-pane active">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Body Mass Index (BMI)</h2>
+              <div class="form-group">
+                <label class="form-label">Unit System</label>
+                <div class="radio-group">
+                  <div class="radio-btn"><input type="radio" name="bmiUnit" id="bmiMetric" value="metric" checked /><label for="bmiMetric">Metric (kg/cm)</label></div>
+                  <div class="radio-btn"><input type="radio" name="bmiUnit" id="bmiImperial" value="imperial" /><label for="bmiImperial">Imperial (lbs/in)</label></div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="bmiWeight">Weight</label>
+                  <div class="input-group">
+                    <input class="form-control" type="number" id="bmiWeight" placeholder="70" min="1" />
+                    <span class="input-addon" id="bmiWeightUnit">kg</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="bmiHeight">Height</label>
+                  <div class="input-group">
+                    <input class="form-control" type="number" id="bmiHeight" placeholder="175" min="1" />
+                    <span class="input-addon" id="bmiHeightUnit">cm</span>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="calcBMI()">Calculate BMI</button>
+
+              <div id="bmiResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-box" id="bmiBox">
+                  <div class="result-label">Your BMI</div>
+                  <div class="result-value large" id="bmiValue">—</div>
+                  <div class="result-note" id="bmiCategory"></div>
+                </div>
+                <div style="margin-top:1rem;">
+                  <div class="progress-bar"><div class="progress-fill" id="bmiBar" style="width:0%"></div></div>
+                  <div style="display:flex;justify-content:space-between;font-size:.7rem;color:var(--clr-text-muted);margin-top:.25rem;">
+                    <span>Underweight</span><span>Normal</span><span>Overweight</span><span>Obese</span>
+                  </div>
+                </div>
+                <div class="result-grid" style="margin-top:1rem;" id="bmiGrid"></div>
+              </div>
+            </div>
+
+            <!-- ── CALORIES (TDEE) ── -->
+            <div id="tab-calories" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Daily Calorie Needs (TDEE)</h2>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="calAge">Age (years)</label>
+                  <input class="form-control" type="number" id="calAge" placeholder="25" min="1" max="120" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Gender</label>
+                  <div class="radio-group">
+                    <div class="radio-btn"><input type="radio" name="calGender" id="calMale" value="male" checked /><label for="calMale">Male</label></div>
+                    <div class="radio-btn"><input type="radio" name="calGender" id="calFemale" value="female" /><label for="calFemale">Female</label></div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="calWeight">Weight (kg)</label>
+                  <input class="form-control" type="number" id="calWeight" placeholder="70" min="1" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="calHeight">Height (cm)</label>
+                  <input class="form-control" type="number" id="calHeight" placeholder="175" min="1" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="calActivity">Activity Level</label>
+                <select class="form-control" id="calActivity">
+                  <option value="1.2">Sedentary (desk job, no exercise)</option>
+                  <option value="1.375">Lightly Active (1–3 days/week)</option>
+                  <option value="1.55" selected>Moderately Active (3–5 days/week)</option>
+                  <option value="1.725">Very Active (6–7 days/week)</option>
+                  <option value="1.9">Extremely Active (physical job + training)</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" onclick="calcCalories()">Calculate</button>
+
+              <div id="calResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-box info">
+                  <div class="result-label">Maintenance Calories (TDEE)</div>
+                  <div class="result-value large text-primary" id="calTDEE">—</div>
+                  <div class="result-note">Calories per day to maintain your current weight</div>
+                </div>
+                <div class="result-grid" style="margin-top:1rem;" id="calGrid"></div>
+              </div>
+            </div>
+
+            <!-- ── MACROS ── -->
+            <div id="tab-macros" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Macro Calculator</h2>
+              <div class="form-group">
+                <label class="form-label" for="macroCalories">Daily Calorie Target</label>
+                <input class="form-control" type="number" id="macroCalories" placeholder="2000" min="500" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="macroGoal">Fitness Goal</label>
+                <select class="form-control" id="macroGoal">
+                  <option value="lose">Weight Loss (high protein, low carb)</option>
+                  <option value="maintain" selected>Maintain / Recomposition</option>
+                  <option value="gain">Muscle Gain (high protein, high carb)</option>
+                  <option value="keto">Ketogenic (very low carb)</option>
+                  <option value="athlete">Athletic Performance</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" onclick="calcMacros()">Calculate Macros</button>
+
+              <div id="macroResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-grid" id="macroGrid"></div>
+                <div class="panel-body" style="margin-top:1rem;padding:1rem;background:var(--clr-surface-2);border-radius:var(--r-md);" id="macroBreakdown"></div>
+              </div>
+            </div>
+
+            <!-- ── HEART RATE ── -->
+            <div id="tab-hr" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Max Heart Rate &amp; Zones</h2>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="hrAge">Age (years)</label>
+                  <input class="form-control" type="number" id="hrAge" placeholder="30" min="1" max="120" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="hrResting">Resting Heart Rate (bpm) <span class="text-muted text-sm">optional</span></label>
+                  <input class="form-control" type="number" id="hrResting" placeholder="60" min="30" max="120" />
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="calcHR()">Calculate</button>
+              <div id="hrResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-box info">
+                  <div class="result-label">Maximum Heart Rate</div>
+                  <div class="result-value large text-primary" id="hrMax">—</div>
+                  <div class="result-note">Formula: 220 − Age (Tanaka formula)</div>
+                </div>
+                <div style="margin-top:1rem;" id="hrZones"></div>
+              </div>
+            </div>
+
+            <!-- ── ONE-REP MAX ── -->
+            <div id="tab-orm" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">One-Rep Max (1RM)</h2>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="ormWeight">Weight Lifted (kg or lbs)</label>
+                  <input class="form-control" type="number" id="ormWeight" placeholder="100" min="1" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ormReps">Reps Completed</label>
+                  <input class="form-control" type="number" id="ormReps" placeholder="5" min="1" max="36" />
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="calcORM()">Calculate 1RM</button>
+
+              <div id="ormResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-box info">
+                  <div class="result-label">Estimated 1-Rep Max</div>
+                  <div class="result-value large text-primary" id="ormMax">—</div>
+                  <div class="result-note">Average of Brzycki, Epley &amp; Lander formulas</div>
+                </div>
+                <div class="result-grid" style="margin-top:1rem;" id="ormGrid"></div>
+              </div>
+            </div>
+
+          </div><!-- /panel tabs -->
+
+          <!-- GOOGLE AD SPACE -->
+          <div class="ad-space ad-space-rectangle"><span class="ad-label">Advertisement</span><span>300×250 Rectangle</span></div>
+          <!-- /GOOGLE AD SPACE -->
+
+        </div><!-- /calc-main -->
+
+        <div class="calc-sidebar">
+          <div class="panel">
+            <div class="panel-header"><span class="panel-title">📊 BMI Scale</span></div>
+            <div class="panel-body">
+              <ul class="footer-links" style="gap:.5rem;">
+                <li class="text-sm"><span class="badge badge-blue">Under 18.5</span> Underweight</li>
+                <li class="text-sm"><span class="badge badge-green">18.5 – 24.9</span> Normal weight</li>
+                <li class="text-sm"><span class="badge badge-orange">25 – 29.9</span> Overweight</li>
+                <li class="text-sm"><span class="badge badge-red">30+</span> Obese</li>
+              </ul>
+              <hr class="divider" />
+              <p class="text-muted text-sm">BMI is a screening tool, not a diagnostic measure. Consult a healthcare professional for personalized advice.</p>
+            </div>
+          </div>
+          <!-- GOOGLE AD SPACE -->
+          <div class="ad-space ad-space-sidebar"><span class="ad-label">Advertisement</span><span>300×600 Sidebar</span></div>
+          <!-- /GOOGLE AD SPACE -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <a href="../index.html" class="logo" style="font-size:1rem;"><div class="logo-icon" style="width:28px;height:28px;font-size:.9rem;">A</div>Arithmex</a>
+        <span class="text-muted text-sm">© 2025 Arithmex — Free Online Calculators</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+  'use strict';
+
+  /* ── BMI ── */
+  document.querySelectorAll('input[name="bmiUnit"]').forEach(r => {
+    r.addEventListener('change', () => {
+      const isMetric = r.value === 'metric';
+      document.getElementById('bmiWeightUnit').textContent = isMetric ? 'kg' : 'lbs';
+      document.getElementById('bmiHeightUnit').textContent = isMetric ? 'cm' : 'in';
+    });
+  });
+
+  function calcBMI() {
+    const unit   = document.querySelector('input[name="bmiUnit"]:checked').value;
+    let w = parseFloat(document.getElementById('bmiWeight').value);
+    let h = parseFloat(document.getElementById('bmiHeight').value);
+    if (!w || !h) { showToast('Please enter weight and height.', 'warn'); return; }
+
+    if (unit === 'imperial') { w = w * 0.453592; h = h * 2.54; }
+    const hm  = h / 100;
+    const bmi = w / (hm * hm);
+    let cat, cls, pct;
+
+    if (bmi < 18.5)      { cat = 'Underweight'; cls = 'info';    pct = (bmi / 18.5) * 20; }
+    else if (bmi < 25)   { cat = 'Normal weight'; cls = 'success'; pct = 20 + ((bmi-18.5)/6.5)*25; }
+    else if (bmi < 30)   { cat = 'Overweight'; cls = 'warn';    pct = 45 + ((bmi-25)/5)*25; }
+    else                 { cat = 'Obese'; cls = 'danger'; pct = Math.min(70 + ((bmi-30)/10)*30, 100); }
+
+    const res = document.getElementById('bmiResult');
+    res.classList.remove('hidden');
+    const box = document.getElementById('bmiBox');
+    box.className = `result-box ${cls}`;
+    document.getElementById('bmiValue').textContent    = bmi.toFixed(1);
+    document.getElementById('bmiCategory').textContent = cat;
+    document.getElementById('bmiBar').style.width      = pct + '%';
+
+    const idealLow  = (18.5 * hm * hm).toFixed(1);
+    const idealHigh = (24.9 * hm * hm).toFixed(1);
+    const weightUnit = unit === 'imperial' ? 'lbs' : 'kg';
+    const idealLowDisp  = unit === 'imperial' ? (parseFloat(idealLow)  * 2.20462).toFixed(1) : idealLow;
+    const idealHighDisp = unit === 'imperial' ? (parseFloat(idealHigh) * 2.20462).toFixed(1) : idealHigh;
+
+    document.getElementById('bmiGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">BMI Score</div><div class="result-item-value">${bmi.toFixed(1)}</div></div>
+      <div class="result-item"><div class="result-item-label">Category</div><div class="result-item-value" style="font-size:1rem;">${cat}</div></div>
+      <div class="result-item"><div class="result-item-label">Ideal Weight Low</div><div class="result-item-value text-accent">${idealLowDisp} ${weightUnit}</div></div>
+      <div class="result-item"><div class="result-item-label">Ideal Weight High</div><div class="result-item-value text-accent">${idealHighDisp} ${weightUnit}</div></div>
+    `;
+  }
+
+  /* ── Calories (TDEE) ── */
+  function calcCalories() {
+    const age      = parseFloat(document.getElementById('calAge').value);
+    const weight   = parseFloat(document.getElementById('calWeight').value);
+    const height   = parseFloat(document.getElementById('calHeight').value);
+    const gender   = document.querySelector('input[name="calGender"]:checked').value;
+    const activity = parseFloat(document.getElementById('calActivity').value);
+
+    if (!age || !weight || !height) { showToast('Please fill all fields.', 'warn'); return; }
+
+    // Mifflin-St Jeor formula
+    let bmr;
+    if (gender === 'male')   bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+    else                     bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+
+    const tdee = bmr * activity;
+
+    document.getElementById('calResult').classList.remove('hidden');
+    document.getElementById('calTDEE').textContent = Math.round(tdee) + ' kcal';
+
+    document.getElementById('calGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">BMR</div><div class="result-item-value">${Math.round(bmr)} kcal</div></div>
+      <div class="result-item"><div class="result-item-label">Maintenance</div><div class="result-item-value text-primary">${Math.round(tdee)} kcal</div></div>
+      <div class="result-item"><div class="result-item-label">Weight Loss (−500)</div><div class="result-item-value text-accent">${Math.round(tdee - 500)} kcal</div></div>
+      <div class="result-item"><div class="result-item-label">Weight Gain (+500)</div><div class="result-item-value text-purple" style="color:var(--clr-purple)">${Math.round(tdee + 500)} kcal</div></div>
+    `;
+  }
+
+  /* ── Macros ── */
+  const MACRO_SPLITS = {
+    lose:     { p: .40, f: .35, c: .25 },
+    maintain: { p: .30, f: .30, c: .40 },
+    gain:     { p: .30, f: .25, c: .45 },
+    keto:     { p: .25, f: .70, c: .05 },
+    athlete:  { p: .25, f: .20, c: .55 },
+  };
+
+  function calcMacros() {
+    const cals = parseFloat(document.getElementById('macroCalories').value);
+    const goal = document.getElementById('macroGoal').value;
+    if (!cals || cals < 500) { showToast('Enter a valid calorie target (500+).', 'warn'); return; }
+
+    const { p, f, c } = MACRO_SPLITS[goal];
+    const proteinG = Math.round((cals * p) / 4);
+    const fatG     = Math.round((cals * f) / 9);
+    const carbG    = Math.round((cals * c) / 4);
+
+    document.getElementById('macroResult').classList.remove('hidden');
+    document.getElementById('macroGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">Protein</div><div class="result-item-value text-primary">${proteinG}g</div></div>
+      <div class="result-item"><div class="result-item-label">Carbohydrates</div><div class="result-item-value text-accent">${carbG}g</div></div>
+      <div class="result-item"><div class="result-item-label">Fats</div><div class="result-item-value text-warn" style="color:var(--clr-warn)">${fatG}g</div></div>
+      <div class="result-item"><div class="result-item-label">Total Calories</div><div class="result-item-value">${cals} kcal</div></div>
+    `;
+    document.getElementById('macroBreakdown').innerHTML = `
+      <p class="text-sm text-muted">Split: <strong>${Math.round(p*100)}% protein</strong> / <strong>${Math.round(c*100)}% carbs</strong> / <strong>${Math.round(f*100)}% fat</strong></p>
+      <p class="text-sm text-muted" style="margin-top:.5rem;">Protein: ${proteinG}g × 4 = ${proteinG*4} kcal &nbsp;|&nbsp; Carbs: ${carbG}g × 4 = ${carbG*4} kcal &nbsp;|&nbsp; Fat: ${fatG}g × 9 = ${fatG*9} kcal</p>
+    `;
+  }
+
+  /* ── Heart Rate ── */
+  function calcHR() {
+    const age     = parseFloat(document.getElementById('hrAge').value);
+    const resting = parseFloat(document.getElementById('hrResting').value) || null;
+    if (!age) { showToast('Please enter your age.', 'warn'); return; }
+
+    const maxHR = Math.round(220 - age);
+    document.getElementById('hrResult').classList.remove('hidden');
+    document.getElementById('hrMax').textContent = maxHR + ' bpm';
+
+    const zones = [
+      { name: 'Zone 1 — Warm Up',     pct: [50, 60], color: 'var(--clr-accent)' },
+      { name: 'Zone 2 — Fat Burn',     pct: [60, 70], color: 'var(--clr-primary)' },
+      { name: 'Zone 3 — Aerobic',      pct: [70, 80], color: 'var(--clr-warn)' },
+      { name: 'Zone 4 — Anaerobic',    pct: [80, 90], color: 'var(--clr-purple)' },
+      { name: 'Zone 5 — Max Effort',   pct: [90, 100], color: 'var(--clr-danger)' },
+    ];
+
+    const zonesHTML = zones.map(z => {
+      const low  = Math.round(maxHR * z.pct[0] / 100);
+      const high = Math.round(maxHR * z.pct[1] / 100);
+      return `
+        <div class="history-item" style="border-left:3px solid ${z.color};">
+          <span class="text-sm" style="flex:1;">${z.name}</span>
+          <span class="font-mono text-sm" style="color:${z.color};">${low}–${high} bpm</span>
+        </div>`;
+    }).join('');
+    document.getElementById('hrZones').innerHTML = `<div style="display:flex;flex-direction:column;gap:.5rem;">${zonesHTML}</div>`;
+  }
+
+  /* ── One-Rep Max ── */
+  function calcORM() {
+    const w = parseFloat(document.getElementById('ormWeight').value);
+    const r = parseFloat(document.getElementById('ormReps').value);
+    if (!w || !r || r < 1) { showToast('Please enter weight and reps.', 'warn'); return; }
+    if (r === 1) { document.getElementById('ormResult').classList.remove('hidden'); document.getElementById('ormMax').textContent = w + ' (entered)'; return; }
+
+    const brzycki = w / (1.0278 - 0.0278 * r);
+    const epley   = w * (1 + r / 30);
+    const lander  = (100 * w) / (101.3 - 2.67123 * r);
+    const avg     = (brzycki + epley + lander) / 3;
+
+    document.getElementById('ormResult').classList.remove('hidden');
+    document.getElementById('ormMax').textContent = avg.toFixed(1);
+
+    document.getElementById('ormGrid').innerHTML = [
+      { label: '90% (1–2 reps)', val: avg * .9 },
+      { label: '80% (4–6 reps)', val: avg * .8 },
+      { label: '70% (8–12 reps)', val: avg * .7 },
+      { label: '60% (15+ reps)', val: avg * .6 },
+    ].map(({ label, val }) => `
+      <div class="result-item"><div class="result-item-label">${label}</div><div class="result-item-value">${val.toFixed(1)}</div></div>
+    `).join('');
+  }
+  </script>
+</body>
+</html>

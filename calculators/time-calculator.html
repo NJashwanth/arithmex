@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time Calculator — Age, Timezone, Countdown | Arithmex</title>
+  <meta name="description" content="Free time calculators: exact age, time duration, timezone converter, work hours calculator, and countdown timer. All instant, no sign-up." />
+  <meta name="keywords" content="age calculator, timezone converter, countdown timer, work hours calculator, time duration calculator" />
+  <link rel="canonical" href="https://yourusername.github.io/arithmex/calculators/time-calculator.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- GOOGLE ADSENSE -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">A</div>Arithmex</a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="universal-calculator.html">Universal</a></li>
+          <li><a href="finance-calculator.html">Finance</a></li>
+          <li><a href="fitness-calculator.html">Fitness</a></li>
+          <li><a href="health-calculator.html">Health</a></li>
+          <li><a href="time-calculator.html" class="active">Time</a></li>
+          <li><a href="unit-converter.html">Converter</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☀️</span></button>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- GOOGLE AD SPACE -->
+  <div class="container" style="padding-top:1rem;">
+    <div class="ad-space ad-space-leaderboard"><span class="ad-label">Advertisement</span><span>728×90 Leaderboard</span></div>
+  </div>
+  <!-- /GOOGLE AD SPACE -->
+
+  <main class="calc-page">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><span class="breadcrumb-sep">›</span><span>Time Calculator</span>
+      </div>
+      <div class="calc-page-header">
+        <h1 class="page-title"><span>⏰</span> Time Calculator</h1>
+        <p class="page-desc">Exact age, time durations, timezones, work hours, and a live countdown timer.</p>
+      </div>
+
+      <div class="calc-layout">
+        <div class="calc-main">
+
+          <div class="panel" data-tabs>
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="tab-age">Age</button>
+              <button class="tab-btn" data-tab="tab-duration">Duration</button>
+              <button class="tab-btn" data-tab="tab-timezone">Timezone</button>
+              <button class="tab-btn" data-tab="tab-workhours">Work Hours</button>
+              <button class="tab-btn" data-tab="tab-countdown">Countdown</button>
+            </div>
+
+            <!-- ── AGE CALCULATOR ── -->
+            <div id="tab-age" class="tab-pane active">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Exact Age Calculator</h2>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="ageDOB">Date of Birth</label>
+                  <input class="form-control" type="date" id="ageDOB" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ageOn">Calculate Age On</label>
+                  <input class="form-control" type="date" id="ageOn" />
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="calcAge()">Calculate Age</button>
+
+              <div id="ageResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-box info">
+                  <div class="result-label">Age</div>
+                  <div class="result-value large text-primary" id="ageOutput">—</div>
+                </div>
+                <div class="result-grid" style="margin-top:1rem;" id="ageGrid"></div>
+              </div>
+            </div>
+
+            <!-- ── DURATION ── -->
+            <div id="tab-duration" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Time Duration Calculator</h2>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="durStart">Start Date &amp; Time</label>
+                  <input class="form-control" type="datetime-local" id="durStart" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="durEnd">End Date &amp; Time</label>
+                  <input class="form-control" type="datetime-local" id="durEnd" />
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="calcDuration()">Calculate Duration</button>
+
+              <div id="durResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-grid" id="durGrid"></div>
+              </div>
+            </div>
+
+            <!-- ── TIMEZONE ── -->
+            <div id="tab-timezone" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">World Clock &amp; Timezone Converter</h2>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="tzFrom">From Timezone</label>
+                  <select class="form-control" id="tzFrom" onchange="convertTZ()"></select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="tzTime">Date &amp; Time</label>
+                  <input class="form-control" type="datetime-local" id="tzTime" oninput="convertTZ()" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="tzTo">To Timezone</label>
+                <select class="form-control" id="tzTo" onchange="convertTZ()"></select>
+              </div>
+              <div id="tzResult" class="result-box info hidden" style="margin-top:1rem;">
+                <div class="result-label">Converted Time</div>
+                <div class="result-value" id="tzOutput" style="font-size:1.5rem;">—</div>
+                <div class="result-note" id="tzNote"></div>
+              </div>
+              <hr class="divider" />
+              <h3 style="font-size:1rem;font-weight:600;margin-bottom:.75rem;">World Clock — Major Cities</h3>
+              <div class="tz-list" id="worldClock"></div>
+            </div>
+
+            <!-- ── WORK HOURS ── -->
+            <div id="tab-workhours" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Work Hours Calculator</h2>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="workStart">Start Time</label>
+                  <input class="form-control" type="time" id="workStart" value="09:00" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="workEnd">End Time</label>
+                  <input class="form-control" type="time" id="workEnd" value="17:00" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="workBreak">Break Duration (minutes)</label>
+                  <input class="form-control" type="number" id="workBreak" value="30" min="0" max="480" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="workRate">Hourly Rate ($) <span class="text-muted text-sm">optional</span></label>
+                  <input class="form-control" type="number" id="workRate" placeholder="25.00" min="0" step="0.01" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="workDays">Working Days</label>
+                <input class="form-control" type="number" id="workDays" value="5" min="1" max="365" />
+              </div>
+              <button class="btn btn-primary" onclick="calcWorkHours()">Calculate</button>
+
+              <div id="workResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-grid" id="workGrid"></div>
+              </div>
+            </div>
+
+            <!-- ── COUNTDOWN ── -->
+            <div id="tab-countdown" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Countdown Timer</h2>
+              <div class="form-group">
+                <label class="form-label" for="cdTarget">Target Date &amp; Time</label>
+                <input class="form-control" type="datetime-local" id="cdTarget" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cdLabel">Event Name <span class="text-muted text-sm">optional</span></label>
+                <input class="form-control" type="text" id="cdLabel" placeholder="My Birthday, Project Deadline…" maxlength="60" />
+              </div>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <button class="btn btn-primary" onclick="startCountdown()">Start Countdown</button>
+                <button class="btn btn-outline" onclick="stopCountdown()">Stop</button>
+              </div>
+
+              <div id="cdEventName" style="margin-top:1rem;font-size:1.1rem;font-weight:600;display:none;"></div>
+              <div class="countdown-display" id="cdDisplay" style="display:none;">—</div>
+              <div class="result-grid hidden" id="cdGrid" style="margin-top:.5rem;"></div>
+            </div>
+
+          </div><!-- /panel -->
+
+          <!-- GOOGLE AD SPACE -->
+          <div class="ad-space ad-space-rectangle"><span class="ad-label">Advertisement</span><span>300×250 Rectangle</span></div>
+          <!-- /GOOGLE AD SPACE -->
+
+        </div><!-- /calc-main -->
+
+        <div class="calc-sidebar">
+          <div class="panel">
+            <div class="panel-header"><span class="panel-title">🌍 Current Time</span></div>
+            <div class="panel-body">
+              <div style="font-size:1.5rem;font-weight:800;font-family:var(--font-mono);color:var(--clr-primary);" id="currentTime">—</div>
+              <div class="text-muted text-sm" id="currentDate" style="margin-top:.25rem;"></div>
+              <div class="text-muted text-sm" id="currentTZ"  style="margin-top:.25rem;"></div>
+            </div>
+          </div>
+          <!-- GOOGLE AD SPACE -->
+          <div class="ad-space ad-space-sidebar"><span class="ad-label">Advertisement</span><span>300×600 Sidebar</span></div>
+          <!-- /GOOGLE AD SPACE -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <a href="../index.html" class="logo" style="font-size:1rem;"><div class="logo-icon" style="width:28px;height:28px;font-size:.9rem;">A</div>Arithmex</a>
+        <span class="text-muted text-sm">© 2025 Arithmex — Free Online Calculators</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+  'use strict';
+
+  /* ── Age ── */
+  document.addEventListener('DOMContentLoaded', () => {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('ageOn').value = today;
+    document.getElementById('ageDOB').max  = today;
+  });
+
+  function calcAge() {
+    const dob = new Date(document.getElementById('ageDOB').value);
+    const on  = new Date(document.getElementById('ageOn').value);
+    if (isNaN(dob) || isNaN(on)) { showToast('Please select valid dates.', 'warn'); return; }
+    if (dob > on) { showToast('Date of birth cannot be after the target date.', 'warn'); return; }
+
+    let years  = on.getFullYear() - dob.getFullYear();
+    let months = on.getMonth()    - dob.getMonth();
+    let days   = on.getDate()     - dob.getDate();
+
+    if (days   < 0) { months--; const prevMonth = new Date(on.getFullYear(), on.getMonth(), 0); days += prevMonth.getDate(); }
+    if (months < 0) { years--;  months += 12; }
+
+    const totalDays   = Math.floor((on - dob) / 86400000);
+    const totalWeeks  = Math.floor(totalDays / 7);
+    const totalMonths = years * 12 + months;
+    const totalHours  = totalDays * 24;
+
+    document.getElementById('ageResult').classList.remove('hidden');
+    document.getElementById('ageOutput').textContent = `${years} yrs, ${months} mos, ${days} days`;
+
+    document.getElementById('ageGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">Years</div><div class="result-item-value text-primary">${years}</div></div>
+      <div class="result-item"><div class="result-item-label">Months</div><div class="result-item-value">${totalMonths}</div></div>
+      <div class="result-item"><div class="result-item-label">Weeks</div><div class="result-item-value">${totalWeeks.toLocaleString()}</div></div>
+      <div class="result-item"><div class="result-item-label">Days</div><div class="result-item-value">${totalDays.toLocaleString()}</div></div>
+    `;
+  }
+
+  /* ── Duration ── */
+  function calcDuration() {
+    const start = new Date(document.getElementById('durStart').value);
+    const end   = new Date(document.getElementById('durEnd').value);
+    if (isNaN(start) || isNaN(end)) { showToast('Please select both date/time values.', 'warn'); return; }
+
+    let diff = Math.abs(end - start);
+    const days    = Math.floor(diff / 86400000);          diff -= days * 86400000;
+    const hours   = Math.floor(diff / 3600000);            diff -= hours * 3600000;
+    const minutes = Math.floor(diff / 60000);              diff -= minutes * 60000;
+    const seconds = Math.floor(diff / 1000);
+
+    const totalMs  = Math.abs(end - start);
+    const totalSec = Math.floor(totalMs / 1000);
+    const totalMin = Math.floor(totalMs / 60000);
+    const totalHrs = Math.round(totalMs / 3600000 * 10) / 10;
+
+    document.getElementById('durResult').classList.remove('hidden');
+    document.getElementById('durGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">Duration</div><div class="result-item-value" style="font-size:1rem;">${days}d ${hours}h ${minutes}m ${seconds}s</div></div>
+      <div class="result-item"><div class="result-item-label">Total Hours</div><div class="result-item-value text-primary">${totalHrs}</div></div>
+      <div class="result-item"><div class="result-item-label">Total Minutes</div><div class="result-item-value">${totalMin.toLocaleString()}</div></div>
+      <div class="result-item"><div class="result-item-label">Total Seconds</div><div class="result-item-value">${totalSec.toLocaleString()}</div></div>
+    `;
+  }
+
+  /* ── Timezone ── */
+  const TIMEZONES = [
+    { city: 'New York',    tz: 'America/New_York'     },
+    { city: 'Los Angeles', tz: 'America/Los_Angeles'  },
+    { city: 'Chicago',     tz: 'America/Chicago'      },
+    { city: 'Denver',      tz: 'America/Denver'       },
+    { city: 'London',      tz: 'Europe/London'        },
+    { city: 'Paris',       tz: 'Europe/Paris'         },
+    { city: 'Berlin',      tz: 'Europe/Berlin'        },
+    { city: 'Moscow',      tz: 'Europe/Moscow'        },
+    { city: 'Dubai',       tz: 'Asia/Dubai'           },
+    { city: 'Mumbai',      tz: 'Asia/Kolkata'         },
+    { city: 'Singapore',   tz: 'Asia/Singapore'       },
+    { city: 'Tokyo',       tz: 'Asia/Tokyo'           },
+    { city: 'Sydney',      tz: 'Australia/Sydney'     },
+    { city: 'Auckland',    tz: 'Pacific/Auckland'     },
+    { city: 'São Paulo',   tz: 'America/Sao_Paulo'   },
+    { city: 'Mexico City', tz: 'America/Mexico_City'  },
+    { city: 'Toronto',     tz: 'America/Toronto'      },
+    { city: 'Seoul',       tz: 'Asia/Seoul'           },
+    { city: 'Shanghai',    tz: 'Asia/Shanghai'        },
+    { city: 'Cairo',       tz: 'Africa/Cairo'         },
+    { city: 'Johannesburg',tz: 'Africa/Johannesburg'  },
+    { city: 'UTC',         tz: 'UTC'                  },
+  ];
+
+  function populateTZSelects() {
+    const from = document.getElementById('tzFrom');
+    const to   = document.getElementById('tzTo');
+    TIMEZONES.forEach(({ city, tz }) => {
+      from.add(new Option(`${city} (${tz})`, tz));
+      to.add(new Option(`${city} (${tz})`, tz));
+    });
+    // Detect user's timezone
+    const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    from.value = TIMEZONES.find(t => t.tz === userTZ)?.tz || 'America/New_York';
+    to.value   = 'Asia/Tokyo';
+
+    // Set current local time
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    document.getElementById('tzTime').value =
+      `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  }
+
+  function convertTZ() {
+    const timeStr = document.getElementById('tzTime').value;
+    const from    = document.getElementById('tzFrom').value;
+    const to      = document.getElementById('tzTo').value;
+    if (!timeStr) { document.getElementById('tzResult').classList.add('hidden'); return; }
+
+    try {
+      // Parse input as if it's in 'from' timezone
+      const inputDate = new Date(timeStr);
+      // Format input time in the 'from' timezone
+      const fromFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: from,
+        year:'numeric', month:'2-digit', day:'2-digit',
+        hour:'2-digit', minute:'2-digit', second:'2-digit', hour12: false
+      });
+      // Convert the entered time FROM the source tz
+      // We use a trick: create a date by interpreting the local time as if it's in 'from' tz
+      const parts = timeStr.split('T');
+      const [y, m, d] = parts[0].split('-').map(Number);
+      const [hh, mm]  = parts[1].split(':').map(Number);
+
+      // Get UTC offset for source timezone at that moment
+      const tmpDate = new Date(Date.UTC(y, m-1, d, hh, mm));
+      const fromOffset = getUTCOffset(from, tmpDate);
+      const toOffset   = getUTCOffset(to, tmpDate);
+
+      const utcMs = tmpDate.getTime() - fromOffset * 60000;
+      const converted = new Date(utcMs + toOffset * 60000);
+
+      const result = converted.toLocaleString('en-US', {
+        weekday:'long', year:'numeric', month:'long', day:'numeric',
+        hour:'2-digit', minute:'2-digit', hour12: true
+      });
+
+      document.getElementById('tzResult').classList.remove('hidden');
+      document.getElementById('tzOutput').textContent = result;
+      const diff = (toOffset - fromOffset) / 60;
+      document.getElementById('tzNote').textContent = `Time difference: ${diff >= 0 ? '+' : ''}${diff} hours`;
+    } catch(e) {
+      document.getElementById('tzResult').classList.add('hidden');
+    }
+  }
+
+  function getUTCOffset(tz, date) {
+    // Returns offset in minutes (positive = ahead of UTC)
+    const utcStr = date.toLocaleString('en-US', { timeZone: 'UTC', hour12: false,
+      year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+    const tzStr  = date.toLocaleString('en-US', { timeZone: tz, hour12: false,
+      year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+
+    const toMs = s => {
+      const [datePart, timePart] = s.split(', ');
+      const [mo, dy, yr] = datePart.split('/');
+      const [hr, mn] = timePart.split(':');
+      return new Date(`${yr}-${mo.padStart(2,'0')}-${dy.padStart(2,'0')}T${hr.padStart(2,'0')}:${mn}:00Z`).getTime();
+    };
+    return (toMs(tzStr) - toMs(utcStr)) / 60000;
+  }
+
+  /* ── World Clock ── */
+  function updateWorldClock() {
+    const now = new Date();
+    const clockEl = document.getElementById('worldClock');
+    if (!clockEl) return;
+    clockEl.innerHTML = TIMEZONES.slice(0, 12).map(({ city, tz }) => {
+      const time = now.toLocaleTimeString('en-US', { timeZone: tz, hour:'2-digit', minute:'2-digit', hour12: true });
+      const date = now.toLocaleDateString('en-US', { timeZone: tz, month:'short', day:'numeric' });
+      return `<div class="tz-card"><div class="tz-city">${city}</div><div class="tz-zone">${tz}</div><div class="tz-time">${time} <span style="font-size:.7rem;color:var(--clr-text-muted);">${date}</span></div></div>`;
+    }).join('');
+  }
+
+  /* ── Work Hours ── */
+  function calcWorkHours() {
+    const start  = document.getElementById('workStart').value;
+    const end    = document.getElementById('workEnd').value;
+    const brk    = parseFloat(document.getElementById('workBreak').value) || 0;
+    const rate   = parseFloat(document.getElementById('workRate').value) || 0;
+    const days   = parseFloat(document.getElementById('workDays').value) || 1;
+
+    const [sh, sm] = start.split(':').map(Number);
+    const [eh, em] = end.split(':').map(Number);
+    let minutes = (eh * 60 + em) - (sh * 60 + sm) - brk;
+    if (minutes < 0) minutes += 24 * 60; // overnight
+    const hoursPerDay = minutes / 60;
+    const totalHours  = hoursPerDay * days;
+    const totalPay    = totalHours * rate;
+    const overtime    = Math.max(0, totalHours - 40);
+
+    document.getElementById('workResult').classList.remove('hidden');
+    document.getElementById('workGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">Hours / Day</div><div class="result-item-value text-primary">${hoursPerDay.toFixed(2)}</div></div>
+      <div class="result-item"><div class="result-item-label">Total Hours</div><div class="result-item-value">${totalHours.toFixed(2)}</div></div>
+      ${rate ? `<div class="result-item"><div class="result-item-label">Total Pay</div><div class="result-item-value text-accent">$${totalPay.toFixed(2)}</div></div>` : ''}
+      <div class="result-item"><div class="result-item-label">Overtime (>40h)</div><div class="result-item-value ${overtime > 0 ? 'text-danger' : ''}">${overtime.toFixed(2)}h</div></div>
+    `;
+  }
+
+  /* ── Countdown ── */
+  let cdInterval = null;
+
+  function startCountdown() {
+    const target = new Date(document.getElementById('cdTarget').value);
+    const label  = document.getElementById('cdLabel').value.trim();
+    if (isNaN(target)) { showToast('Please select a target date/time.', 'warn'); return; }
+
+    stopCountdown();
+    const display  = document.getElementById('cdDisplay');
+    const grid     = document.getElementById('cdGrid');
+    const nameEl   = document.getElementById('cdEventName');
+    display.style.display = 'block';
+    grid.classList.remove('hidden');
+    if (label) { nameEl.style.display = 'block'; nameEl.textContent = '⏳ ' + label; }
+
+    function tick() {
+      const now  = new Date();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        display.textContent = '🎉 Time is up!';
+        display.className   = 'countdown-display success';
+        grid.classList.add('hidden');
+        clearInterval(cdInterval);
+        return;
+      }
+
+      const totalSec = Math.floor(diff / 1000);
+      const dd = Math.floor(totalSec / 86400);
+      const hh = Math.floor((totalSec % 86400) / 3600);
+      const mm = Math.floor((totalSec % 3600) / 60);
+      const ss = totalSec % 60;
+
+      const pad = n => String(n).padStart(2, '0');
+      display.textContent = dd > 0
+        ? `${dd}d ${pad(hh)}:${pad(mm)}:${pad(ss)}`
+        : `${pad(hh)}:${pad(mm)}:${pad(ss)}`;
+
+      display.className = diff < 60000
+        ? 'countdown-display danger'
+        : diff < 3600000
+          ? 'countdown-display warn'
+          : 'countdown-display';
+
+      grid.innerHTML = `
+        <div class="result-item"><div class="result-item-label">Days</div><div class="result-item-value">${dd}</div></div>
+        <div class="result-item"><div class="result-item-label">Hours</div><div class="result-item-value">${hh}</div></div>
+        <div class="result-item"><div class="result-item-label">Minutes</div><div class="result-item-value">${mm}</div></div>
+        <div class="result-item"><div class="result-item-label">Seconds</div><div class="result-item-value text-primary">${ss}</div></div>
+      `;
+    }
+
+    tick();
+    cdInterval = setInterval(tick, 1000);
+  }
+
+  function stopCountdown() {
+    clearInterval(cdInterval);
+    cdInterval = null;
+  }
+
+  /* ── Sidebar clock ── */
+  function updateSidebarClock() {
+    const now  = new Date();
+    document.getElementById('currentTime').textContent = now.toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+    document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    document.getElementById('currentTZ').textContent   = 'Timezone: ' + Intl.DateTimeFormat().resolvedOptions().timeZone;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    populateTZSelects();
+    updateWorldClock();
+    updateSidebarClock();
+    setInterval(updateWorldClock, 60000);
+    setInterval(updateSidebarClock, 1000);
+    convertTZ();
+  });
+  </script>
+</body>
+</html>

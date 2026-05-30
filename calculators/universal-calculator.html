@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Universal Calculator — Arithmex</title>
+  <meta name="description" content="Free scientific calculator with history, square root, exponents, parentheses, and clipboard copy. Works instantly in your browser." />
+  <meta name="keywords" content="online calculator, scientific calculator, free calculator, math calculator" />
+  <link rel="canonical" href="https://yourusername.github.io/arithmex/calculators/universal-calculator.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <!-- GOOGLE ADSENSE -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Universal Calculator",
+    "applicationCategory": "UtilitiesApplication",
+    "url": "https://yourusername.github.io/arithmex/calculators/universal-calculator.html",
+    "description": "Free scientific calculator with history and clipboard support."
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ══ HEADER ══════════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo">
+        <div class="logo-icon">A</div>
+        Arithmex
+      </a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="universal-calculator.html" class="active">Universal</a></li>
+          <li><a href="finance-calculator.html">Finance</a></li>
+          <li><a href="fitness-calculator.html">Fitness</a></li>
+          <li><a href="health-calculator.html">Health</a></li>
+          <li><a href="time-calculator.html">Time</a></li>
+          <li><a href="unit-converter.html">Converter</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☀️</span></button>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ AD — Leaderboard ══════════════════════════════ -->
+  <div class="container" style="padding-top:1rem;">
+    <!-- GOOGLE AD SPACE -->
+    <div class="ad-space ad-space-leaderboard">
+      <span class="ad-label">Advertisement</span>
+      <span>728×90 Leaderboard</span>
+    </div>
+    <!-- /GOOGLE AD SPACE -->
+  </div>
+
+  <main class="calc-page">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Universal Calculator</span>
+      </div>
+
+      <div class="calc-page-header">
+        <h1 class="page-title"><span>🧮</span> Universal Calculator</h1>
+        <p class="page-desc">Scientific calculator with history, memory and clipboard support. Use keyboard or tap the buttons.</p>
+      </div>
+
+      <div class="calc-layout">
+
+        <!-- ── Main Calculator ── -->
+        <div class="calc-main">
+          <div class="panel">
+            <div class="panel-body">
+
+              <!-- Display -->
+              <div class="calc-display" id="calcDisplay">
+                <div class="calc-expr" id="calcExpr"></div>
+                <div class="calc-result" id="calcResult">0</div>
+              </div>
+
+              <!-- Copy bar -->
+              <div style="display:flex;justify-content:flex-end;margin-bottom:.75rem;">
+                <button class="copy-btn" id="copyResultBtn">📋 Copy Result</button>
+              </div>
+
+              <!-- Button grid -->
+              <div class="calc-buttons" id="calcButtons">
+
+                <!-- Row 1: functions -->
+                <button class="calc-btn fn" data-action="fn" data-fn="sqrt">√x</button>
+                <button class="calc-btn fn" data-action="fn" data-fn="square">x²</button>
+                <button class="calc-btn fn" data-action="fn" data-fn="percent">%</button>
+                <button class="calc-btn fn clr" data-action="clear">C</button>
+
+                <!-- Row 2 -->
+                <button class="calc-btn fn" data-action="fn" data-fn="sin">sin</button>
+                <button class="calc-btn fn" data-action="fn" data-fn="cos">cos</button>
+                <button class="calc-btn fn" data-action="fn" data-fn="tan">tan</button>
+                <button class="calc-btn fn clr" data-action="backspace">⌫</button>
+
+                <!-- Row 3 -->
+                <button class="calc-btn fn" data-action="fn" data-fn="log">log</button>
+                <button class="calc-btn fn" data-action="fn" data-fn="ln">ln</button>
+                <button class="calc-btn" data-action="input" data-val="(">(</button>
+                <button class="calc-btn" data-action="input" data-val=")">)</button>
+
+                <!-- Row 4: numbers + ops -->
+                <button class="calc-btn" data-action="input" data-val="7">7</button>
+                <button class="calc-btn" data-action="input" data-val="8">8</button>
+                <button class="calc-btn" data-action="input" data-val="9">9</button>
+                <button class="calc-btn op" data-action="input" data-val="÷">÷</button>
+
+                <button class="calc-btn" data-action="input" data-val="4">4</button>
+                <button class="calc-btn" data-action="input" data-val="5">5</button>
+                <button class="calc-btn" data-action="input" data-val="6">6</button>
+                <button class="calc-btn op" data-action="input" data-val="×">×</button>
+
+                <button class="calc-btn" data-action="input" data-val="1">1</button>
+                <button class="calc-btn" data-action="input" data-val="2">2</button>
+                <button class="calc-btn" data-action="input" data-val="3">3</button>
+                <button class="calc-btn op" data-action="input" data-val="-">−</button>
+
+                <button class="calc-btn" data-action="input" data-val="0">0</button>
+                <button class="calc-btn" data-action="input" data-val=".">.</button>
+                <button class="calc-btn op" data-action="input" data-val="^">xʸ</button>
+                <button class="calc-btn op" data-action="input" data-val="+">+</button>
+
+                <!-- Last row -->
+                <button class="calc-btn fn" data-action="fn" data-fn="pi">π</button>
+                <button class="calc-btn fn" data-action="fn" data-fn="e">e</button>
+                <button class="calc-btn eq span-2" data-action="equals">=</button>
+
+              </div>
+
+            </div>
+          </div>
+
+          <!-- GOOGLE AD SPACE — Rectangle between calc and history -->
+          <div class="ad-space ad-space-rectangle">
+            <span class="ad-label">Advertisement</span>
+            <span>300×250 Rectangle</span>
+          </div>
+          <!-- /GOOGLE AD SPACE -->
+        </div>
+
+        <!-- ── Sidebar: History ── -->
+        <div class="calc-sidebar">
+          <div class="panel">
+            <div class="panel-header">
+              <span class="panel-title">📜 History</span>
+              <button class="btn btn-sm btn-outline" id="clearHistory">Clear</button>
+            </div>
+            <div class="panel-body" style="padding:1rem;">
+              <ul class="history-list" id="historyList">
+                <li class="empty-state">
+                  <div style="font-size:2rem;margin-bottom:.5rem;">🕰️</div>
+                  No calculations yet
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- GOOGLE AD SPACE — Sidebar -->
+          <div class="ad-space ad-space-sidebar">
+            <span class="ad-label">Advertisement</span>
+            <span>300×600 Sidebar</span>
+          </div>
+          <!-- /GOOGLE AD SPACE -->
+        </div>
+
+      </div><!-- /calc-layout -->
+    </div>
+  </main>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <a href="../index.html" class="logo" style="font-size:1rem;">
+          <div class="logo-icon" style="width:28px;height:28px;font-size:.9rem;">A</div>
+          Arithmex
+        </a>
+        <span class="text-muted text-sm">© 2025 Arithmex — Free Online Calculators</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+  /* ── Universal Calculator Logic ── */
+  (() => {
+    'use strict';
+
+    const HIST_KEY = 'arithmex-calc-history';
+    const display  = document.getElementById('calcResult');
+    const exprEl   = document.getElementById('calcExpr');
+    const histList = document.getElementById('historyList');
+
+    let expression = '';
+    let lastResult = '';
+    let justEvaled = false;
+
+    /* ── Render display ── */
+    function renderDisplay() {
+      // Scale text if long
+      display.style.fontSize = expression.length > 16
+        ? (expression.length > 24 ? '1.25rem' : '1.75rem')
+        : '';
+      display.textContent = expression || '0';
+      exprEl.textContent  = justEvaled ? lastResult + ' =' : '';
+    }
+
+    /* ── Append to expression ── */
+    function append(val) {
+      if (justEvaled && /^[\d.(π]/.test(val)) expression = '';
+      justEvaled = false;
+      expression += val;
+      renderDisplay();
+    }
+
+    /* ── Apply scientific functions ── */
+    function applyFn(fn) {
+      const num = parseFloat(expression) || 0;
+      const map = {
+        sqrt:   () => Math.sqrt(num),
+        square: () => num * num,
+        percent:() => num / 100,
+        sin:    () => Math.sin(num * Math.PI / 180),
+        cos:    () => Math.cos(num * Math.PI / 180),
+        tan:    () => Math.tan(num * Math.PI / 180),
+        log:    () => Math.log10(num),
+        ln:     () => Math.log(num),
+        pi:     () => { expression += Math.PI.toFixed(10); renderDisplay(); return null; },
+        e:      () => { expression += Math.E.toFixed(10);  renderDisplay(); return null; },
+      };
+      if (!map[fn]) return;
+      const result = map[fn]();
+      if (result === null) return;
+      lastResult = expression + ' [' + fn + ']';
+      expression = formatNum(result);
+      justEvaled = true;
+      renderDisplay();
+      saveHistory(lastResult, expression);
+    }
+
+    /* ── Evaluate ── */
+    function evaluate() {
+      if (!expression) return;
+      try {
+        // Replace display operators with JS operators
+        const sanitized = expression
+          .replace(/÷/g, '/')
+          .replace(/×/g, '*')
+          .replace(/−/g, '-')
+          .replace(/\^/g, '**')
+          .replace(/π/g, Math.PI)
+          .replace(/e(?![0-9])/g, Math.E);
+
+        // Safety check: only allow math chars
+        if (!/^[\d+\-*/().%\s*eE]+$/.test(sanitized)) throw new Error('Invalid');
+
+        // eslint-disable-next-line no-new-func
+        const result = Function('"use strict"; return (' + sanitized + ')')();
+
+        if (!isFinite(result)) throw new Error('Math Error');
+
+        lastResult  = expression;
+        expression  = formatNum(result);
+        justEvaled  = true;
+        renderDisplay();
+        saveHistory(lastResult, expression);
+      } catch {
+        exprEl.textContent = '⚠ Error';
+        expression = '';
+        renderDisplay();
+      }
+    }
+
+    function formatNum(n) {
+      if (Number.isInteger(n) && Math.abs(n) < 1e15) return String(n);
+      const str = parseFloat(n.toPrecision(10)).toString();
+      return str;
+    }
+
+    /* ── History ── */
+    function saveHistory(expr, result) {
+      Storage.push(HIST_KEY, { expr, result, ts: Date.now() });
+      renderHistory();
+    }
+
+    function renderHistory() {
+      const items = Storage.get(HIST_KEY, []);
+      if (!items.length) {
+        histList.innerHTML = `<li class="empty-state"><div style="font-size:2rem;margin-bottom:.5rem;">🕰️</div>No calculations yet</li>`;
+        return;
+      }
+      histList.innerHTML = items.map(({ expr, result }) => `
+        <li class="history-item" data-val="${result}" title="Click to use result">
+          <span class="history-expr">${expr}</span>
+          <span class="history-val">= ${result}</span>
+        </li>
+      `).join('');
+
+      histList.querySelectorAll('.history-item').forEach(li => {
+        li.addEventListener('click', () => {
+          expression = li.dataset.val;
+          justEvaled = false;
+          renderDisplay();
+        });
+      });
+    }
+
+    /* ── Button events ── */
+    document.getElementById('calcButtons').addEventListener('click', e => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      const action = btn.dataset.action;
+
+      if (action === 'input')     append(btn.dataset.val);
+      else if (action === 'clear')    { expression = ''; justEvaled = false; exprEl.textContent = ''; renderDisplay(); }
+      else if (action === 'backspace') { expression = expression.slice(0, -1); renderDisplay(); }
+      else if (action === 'fn')   applyFn(btn.dataset.fn);
+      else if (action === 'equals') evaluate();
+    });
+
+    /* ── Keyboard ── */
+    document.addEventListener('keydown', e => {
+      const key = e.key;
+      if (/^[0-9.]$/.test(key))        append(key);
+      else if (key === '+')             append('+');
+      else if (key === '-')             append('−');
+      else if (key === '*')             append('×');
+      else if (key === '/')             { e.preventDefault(); append('÷'); }
+      else if (key === '^')             append('^');
+      else if (key === '(' || key === ')') append(key);
+      else if (key === '%')             applyFn('percent');
+      else if (key === 'Enter' || key === '=') evaluate();
+      else if (key === 'Backspace')     { expression = expression.slice(0, -1); renderDisplay(); }
+      else if (key === 'Escape')        { expression = ''; justEvaled = false; exprEl.textContent = ''; renderDisplay(); }
+    });
+
+    /* ── Copy button ── */
+    document.getElementById('copyResultBtn').addEventListener('click', function() {
+      copyText(display.textContent, this);
+    });
+
+    /* ── Clear history ── */
+    document.getElementById('clearHistory').addEventListener('click', () => {
+      Storage.set(HIST_KEY, []);
+      renderHistory();
+    });
+
+    /* ── Init ── */
+    renderHistory();
+
+  })();
+  </script>
+</body>
+</html>

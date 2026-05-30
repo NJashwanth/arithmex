@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Calculator — Water, BMR, Body Fat, Pregnancy | Arithmex</title>
+  <meta name="description" content="Free health calculators: daily water intake, BMR, body fat percentage, pregnancy due date and ovulation window. Instant, private, no sign-up." />
+  <meta name="keywords" content="water intake calculator, BMR calculator, body fat calculator, pregnancy due date calculator, ovulation calculator" />
+  <link rel="canonical" href="https://yourusername.github.io/arithmex/calculators/health-calculator.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- GOOGLE ADSENSE -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">A</div>Arithmex</a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="universal-calculator.html">Universal</a></li>
+          <li><a href="finance-calculator.html">Finance</a></li>
+          <li><a href="fitness-calculator.html">Fitness</a></li>
+          <li><a href="health-calculator.html" class="active">Health</a></li>
+          <li><a href="time-calculator.html">Time</a></li>
+          <li><a href="unit-converter.html">Converter</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☀️</span></button>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- GOOGLE AD SPACE -->
+  <div class="container" style="padding-top:1rem;">
+    <div class="ad-space ad-space-leaderboard"><span class="ad-label">Advertisement</span><span>728×90 Leaderboard</span></div>
+  </div>
+  <!-- /GOOGLE AD SPACE -->
+
+  <main class="calc-page">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><span class="breadcrumb-sep">›</span><span>Health Calculator</span>
+      </div>
+      <div class="calc-page-header">
+        <h1 class="page-title"><span>❤️</span> Health Calculator</h1>
+        <p class="page-desc">Water intake, BMR, body fat percentage, pregnancy due date, and ovulation window.</p>
+      </div>
+
+      <div class="calc-layout">
+        <div class="calc-main">
+
+          <div class="panel" data-tabs>
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="tab-water">Water Intake</button>
+              <button class="tab-btn" data-tab="tab-bmr">BMR</button>
+              <button class="tab-btn" data-tab="tab-bodyfat">Body Fat %</button>
+              <button class="tab-btn" data-tab="tab-pregnancy">Due Date</button>
+              <button class="tab-btn" data-tab="tab-ovulation">Ovulation</button>
+            </div>
+
+            <!-- ── WATER INTAKE ── -->
+            <div id="tab-water" class="tab-pane active">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Daily Water Intake</h2>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="waterWeight">Body Weight (kg)</label>
+                  <input class="form-control" type="number" id="waterWeight" placeholder="70" min="1" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="waterActivity">Activity Level</label>
+                  <select class="form-control" id="waterActivity">
+                    <option value="1">Sedentary (little/no exercise)</option>
+                    <option value="1.2" selected>Lightly Active (1–3 days/wk)</option>
+                    <option value="1.4">Moderately Active (3–5 days/wk)</option>
+                    <option value="1.6">Very Active (6–7 days/wk)</option>
+                    <option value="1.8">Athlete / Hard Training</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="waterClimate">Climate</label>
+                <div class="radio-group">
+                  <div class="radio-btn"><input type="radio" name="waterClimate" id="wc-cool" value="cool" checked /><label for="wc-cool">Cool / Temperate</label></div>
+                  <div class="radio-btn"><input type="radio" name="waterClimate" id="wc-hot"  value="hot"  /><label for="wc-hot">Hot / Humid</label></div>
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="calcWater()">Calculate</button>
+
+              <div id="waterResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-box success">
+                  <div class="result-label">Daily Water Recommendation</div>
+                  <div class="result-value large text-accent" id="waterOutput">—</div>
+                  <div class="result-note" id="waterNote"></div>
+                </div>
+                <div class="result-grid" style="margin-top:1rem;" id="waterGrid"></div>
+              </div>
+            </div>
+
+            <!-- ── BMR ── -->
+            <div id="tab-bmr" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Basal Metabolic Rate (BMR)</h2>
+              <p class="text-muted text-sm" style="margin-bottom:1rem;">BMR is the calories your body burns at complete rest to maintain vital functions.</p>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="bmrAge">Age (years)</label>
+                  <input class="form-control" type="number" id="bmrAge" placeholder="30" min="1" max="120" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Gender</label>
+                  <div class="radio-group">
+                    <div class="radio-btn"><input type="radio" name="bmrGender" id="bmrMale" value="male" checked /><label for="bmrMale">Male</label></div>
+                    <div class="radio-btn"><input type="radio" name="bmrGender" id="bmrFemale" value="female" /><label for="bmrFemale">Female</label></div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="bmrWeight">Weight (kg)</label>
+                  <input class="form-control" type="number" id="bmrWeight" placeholder="70" min="1" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="bmrHeight">Height (cm)</label>
+                  <input class="form-control" type="number" id="bmrHeight" placeholder="175" min="1" />
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="calcBMR()">Calculate BMR</button>
+
+              <div id="bmrResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-box info">
+                  <div class="result-label">Basal Metabolic Rate</div>
+                  <div class="result-value large text-primary" id="bmrOutput">—</div>
+                  <div class="result-note">Calories burned at rest (Mifflin-St Jeor formula)</div>
+                </div>
+                <div class="result-grid" style="margin-top:1rem;" id="bmrGrid"></div>
+              </div>
+            </div>
+
+            <!-- ── BODY FAT % ── -->
+            <div id="tab-bodyfat" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Body Fat Percentage (US Navy Method)</h2>
+              <div class="form-group">
+                <label class="form-label">Gender</label>
+                <div class="radio-group">
+                  <div class="radio-btn"><input type="radio" name="bfGender" id="bfMale" value="male" checked onchange="toggleBfFields()" /><label for="bfMale">Male</label></div>
+                  <div class="radio-btn"><input type="radio" name="bfGender" id="bfFemale" value="female" onchange="toggleBfFields()" /><label for="bfFemale">Female</label></div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="bfHeight">Height (cm)</label>
+                  <input class="form-control" type="number" id="bfHeight" placeholder="175" min="1" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="bfNeck">Neck Circumference (cm)</label>
+                  <input class="form-control" type="number" id="bfNeck" placeholder="38" min="1" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="bfWaist">Waist Circumference (cm)</label>
+                  <input class="form-control" type="number" id="bfWaist" placeholder="85" min="1" />
+                </div>
+                <div class="form-group" id="bfHipGroup" style="display:none;">
+                  <label class="form-label" for="bfHip">Hip Circumference (cm) <em class="text-muted text-sm">females</em></label>
+                  <input class="form-control" type="number" id="bfHip" placeholder="95" min="1" />
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="calcBodyFat()">Calculate</button>
+
+              <div id="bfResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-box" id="bfBox">
+                  <div class="result-label">Estimated Body Fat</div>
+                  <div class="result-value large" id="bfOutput">—</div>
+                  <div class="result-note" id="bfCategory"></div>
+                </div>
+                <div class="result-grid" style="margin-top:1rem;" id="bfGrid"></div>
+              </div>
+            </div>
+
+            <!-- ── PREGNANCY DUE DATE ── -->
+            <div id="tab-pregnancy" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Pregnancy Due Date Calculator</h2>
+              <p class="text-muted text-sm" style="margin-bottom:1rem;">Based on Naegele's Rule (LMP + 280 days). For medical guidance, always consult your doctor.</p>
+              <div class="form-group">
+                <label class="form-label" for="lmpDate">First Day of Last Menstrual Period (LMP)</label>
+                <input class="form-control" type="date" id="lmpDate" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="cycleLength">Average Cycle Length (days)</label>
+                <input class="form-control" type="number" id="cycleLength" value="28" min="21" max="45" />
+              </div>
+              <button class="btn btn-primary" onclick="calcDueDate()">Calculate Due Date</button>
+
+              <div id="pregnancyResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-box success">
+                  <div class="result-label">Estimated Due Date</div>
+                  <div class="result-value" id="dueDateOutput" style="font-size:1.5rem;">—</div>
+                  <div class="result-note" id="dueWeeks"></div>
+                </div>
+                <div class="result-grid" style="margin-top:1rem;" id="pregnancyGrid"></div>
+              </div>
+            </div>
+
+            <!-- ── OVULATION ── -->
+            <div id="tab-ovulation" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Ovulation &amp; Fertile Window</h2>
+              <p class="text-muted text-sm" style="margin-bottom:1rem;">Estimates the fertile window based on your cycle. Individual cycles vary — this is not medical advice.</p>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="ovLMP">First Day of Last Period</label>
+                  <input class="form-control" type="date" id="ovLMP" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="ovCycle">Cycle Length (days)</label>
+                  <input class="form-control" type="number" id="ovCycle" value="28" min="21" max="45" />
+                </div>
+              </div>
+              <button class="btn btn-primary" onclick="calcOvulation()">Calculate Fertile Window</button>
+
+              <div id="ovulationResult" class="hidden" style="margin-top:1.5rem;">
+                <div class="result-box info">
+                  <div class="result-label">Estimated Ovulation Date</div>
+                  <div class="result-value" id="ovDate" style="font-size:1.5rem;">—</div>
+                </div>
+                <div class="result-grid" style="margin-top:1rem;" id="ovGrid"></div>
+              </div>
+            </div>
+
+          </div><!-- /panel -->
+
+          <!-- GOOGLE AD SPACE -->
+          <div class="ad-space ad-space-rectangle"><span class="ad-label">Advertisement</span><span>300×250 Rectangle</span></div>
+          <!-- /GOOGLE AD SPACE -->
+
+        </div><!-- /calc-main -->
+
+        <div class="calc-sidebar">
+          <div class="panel">
+            <div class="panel-header"><span class="panel-title">💧 Hydration Tips</span></div>
+            <div class="panel-body">
+              <ul class="footer-links" style="gap:.75rem;">
+                <li class="text-sm text-muted">Drink a glass of water first thing in the morning.</li>
+                <li class="text-sm text-muted">Carry a reusable water bottle throughout the day.</li>
+                <li class="text-sm text-muted">Eat water-rich foods: cucumber, watermelon, soup.</li>
+                <li class="text-sm text-muted">Urine should be pale yellow — dark means dehydration.</li>
+              </ul>
+              <hr class="divider" />
+              <p class="text-muted text-sm">⚕️ These calculators are for informational purposes only. Always consult a healthcare professional for medical advice.</p>
+            </div>
+          </div>
+          <!-- GOOGLE AD SPACE -->
+          <div class="ad-space ad-space-sidebar"><span class="ad-label">Advertisement</span><span>300×600 Sidebar</span></div>
+          <!-- /GOOGLE AD SPACE -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <a href="../index.html" class="logo" style="font-size:1rem;"><div class="logo-icon" style="width:28px;height:28px;font-size:.9rem;">A</div>Arithmex</a>
+        <span class="text-muted text-sm">© 2025 Arithmex — Free Online Calculators</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+  'use strict';
+
+  /* ── Water ── */
+  function calcWater() {
+    const w = parseFloat(document.getElementById('waterWeight').value);
+    const a = parseFloat(document.getElementById('waterActivity').value);
+    const hot = document.querySelector('input[name="waterClimate"]:checked').value === 'hot';
+    if (!w) { showToast('Please enter your weight.', 'warn'); return; }
+
+    let liters = (w * 0.033) * a;
+    if (hot) liters += 0.5;
+
+    document.getElementById('waterResult').classList.remove('hidden');
+    document.getElementById('waterOutput').textContent = liters.toFixed(2) + ' L / day';
+    document.getElementById('waterNote').textContent   = `That's about ${Math.round(liters * 4)} glasses (250 ml each).`;
+
+    document.getElementById('waterGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">Liters / Day</div><div class="result-item-value text-accent">${liters.toFixed(2)} L</div></div>
+      <div class="result-item"><div class="result-item-label">8 oz Glasses</div><div class="result-item-value">${Math.round(liters / 0.237)}</div></div>
+      <div class="result-item"><div class="result-item-label">Fluid oz / Day</div><div class="result-item-value">${Math.round(liters * 33.814)} fl oz</div></div>
+      <div class="result-item"><div class="result-item-label">Cups / Day</div><div class="result-item-value">${Math.round(liters * 4.227)} cups</div></div>
+    `;
+  }
+
+  /* ── BMR ── */
+  function calcBMR() {
+    const age    = parseFloat(document.getElementById('bmrAge').value);
+    const weight = parseFloat(document.getElementById('bmrWeight').value);
+    const height = parseFloat(document.getElementById('bmrHeight').value);
+    const gender = document.querySelector('input[name="bmrGender"]:checked').value;
+    if (!age || !weight || !height) { showToast('Please fill all fields.', 'warn'); return; }
+
+    // Mifflin-St Jeor
+    let mifflin = 10 * weight + 6.25 * height - 5 * age + (gender === 'male' ? 5 : -161);
+    // Harris-Benedict (revised Roza-Shizgal)
+    let harris  = gender === 'male'
+      ? 88.362 + 13.397 * weight + 4.799 * height - 5.677 * age
+      : 447.593 + 9.247 * weight + 3.098 * height - 4.330 * age;
+
+    document.getElementById('bmrResult').classList.remove('hidden');
+    document.getElementById('bmrOutput').textContent = Math.round(mifflin) + ' kcal/day';
+
+    document.getElementById('bmrGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">Mifflin-St Jeor</div><div class="result-item-value text-primary">${Math.round(mifflin)} kcal</div></div>
+      <div class="result-item"><div class="result-item-label">Harris-Benedict</div><div class="result-item-value">${Math.round(harris)} kcal</div></div>
+      <div class="result-item"><div class="result-item-label">Protein Goal</div><div class="result-item-value text-accent">${Math.round(weight * 1.6)}–${Math.round(weight * 2.2)}g</div></div>
+      <div class="result-item"><div class="result-item-label">Calories / hr (rest)</div><div class="result-item-value">${(mifflin / 24).toFixed(1)} kcal</div></div>
+    `;
+  }
+
+  /* ── Body Fat ── */
+  function toggleBfFields() {
+    const isFemale = document.querySelector('input[name="bfGender"]:checked').value === 'female';
+    document.getElementById('bfHipGroup').style.display = isFemale ? '' : 'none';
+  }
+
+  function calcBodyFat() {
+    const gender = document.querySelector('input[name="bfGender"]:checked').value;
+    const h      = parseFloat(document.getElementById('bfHeight').value);
+    const neck   = parseFloat(document.getElementById('bfNeck').value);
+    const waist  = parseFloat(document.getElementById('bfWaist').value);
+    const hip    = parseFloat(document.getElementById('bfHip').value) || 0;
+
+    if (!h || !neck || !waist || (gender === 'female' && !hip)) { showToast('Please fill all fields.', 'warn'); return; }
+
+    let bf;
+    if (gender === 'male') {
+      bf = 495 / (1.0324 - 0.19077 * Math.log10(waist - neck) + 0.15456 * Math.log10(h)) - 450;
+    } else {
+      bf = 495 / (1.29579 - 0.35004 * Math.log10(waist + hip - neck) + 0.22100 * Math.log10(h)) - 450;
+    }
+
+    bf = Math.max(0, Math.min(bf, 70));
+
+    // Category
+    let cat, cls;
+    if (gender === 'male') {
+      if      (bf < 6)  { cat = 'Essential Fat'; cls = 'warn'; }
+      else if (bf < 14) { cat = 'Athletic'; cls = 'success'; }
+      else if (bf < 18) { cat = 'Fitness'; cls = 'success'; }
+      else if (bf < 25) { cat = 'Acceptable'; cls = 'info'; }
+      else              { cat = 'Obese'; cls = 'danger'; }
+    } else {
+      if      (bf < 14) { cat = 'Essential Fat'; cls = 'warn'; }
+      else if (bf < 21) { cat = 'Athletic'; cls = 'success'; }
+      else if (bf < 25) { cat = 'Fitness'; cls = 'success'; }
+      else if (bf < 32) { cat = 'Acceptable'; cls = 'info'; }
+      else              { cat = 'Obese'; cls = 'danger'; }
+    }
+
+    const leanMass = null; // we don't have weight here
+
+    document.getElementById('bfResult').classList.remove('hidden');
+    const box = document.getElementById('bfBox');
+    box.className = `result-box ${cls}`;
+    document.getElementById('bfOutput').textContent   = bf.toFixed(1) + '%';
+    document.getElementById('bfCategory').textContent = `Category: ${cat}`;
+
+    document.getElementById('bfGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">Body Fat %</div><div class="result-item-value">${bf.toFixed(1)}%</div></div>
+      <div class="result-item"><div class="result-item-label">Category</div><div class="result-item-value" style="font-size:1rem;">${cat}</div></div>
+    `;
+  }
+
+  /* ── Pregnancy Due Date ── */
+  function calcDueDate() {
+    const lmpVal  = document.getElementById('lmpDate').value;
+    const cycle   = parseInt(document.getElementById('cycleLength').value) || 28;
+    if (!lmpVal) { showToast('Please select your LMP date.', 'warn'); return; }
+
+    const lmp     = new Date(lmpVal);
+    const ovDay   = cycle - 14; // days after LMP ovulation occurs
+    const dueDate = new Date(lmp);
+    dueDate.setDate(dueDate.getDate() + 280 + (cycle - 28));
+
+    const today   = new Date();
+    const diffMs  = dueDate - today;
+    const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+    const weeksPreg = Math.floor((today - lmp) / (1000 * 60 * 60 * 24 * 7));
+
+    const fmt = d => d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    const conception = new Date(lmp);
+    conception.setDate(conception.getDate() + ovDay);
+
+    const trim1End = new Date(lmp); trim1End.setDate(trim1End.getDate() + 13 * 7);
+    const trim2End = new Date(lmp); trim2End.setDate(trim2End.getDate() + 26 * 7);
+
+    document.getElementById('pregnancyResult').classList.remove('hidden');
+    document.getElementById('dueDateOutput').textContent = fmt(dueDate);
+    document.getElementById('dueWeeks').textContent      = diffDays > 0
+      ? `${diffDays} days away (${Math.floor(diffDays/7)} weeks ${diffDays%7} days) — Currently ~${weeksPreg} weeks pregnant`
+      : 'The due date has passed.';
+
+    document.getElementById('pregnancyGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">Est. Conception</div><div class="result-item-value" style="font-size:.9rem;">${fmt(conception)}</div></div>
+      <div class="result-item"><div class="result-item-label">End of 1st Trimester</div><div class="result-item-value" style="font-size:.9rem;">${fmt(trim1End)}</div></div>
+      <div class="result-item"><div class="result-item-label">End of 2nd Trimester</div><div class="result-item-value" style="font-size:.9rem;">${fmt(trim2End)}</div></div>
+      <div class="result-item"><div class="result-item-label">Weeks Pregnant</div><div class="result-item-value text-primary">${weeksPreg} wks</div></div>
+    `;
+  }
+
+  /* ── Ovulation ── */
+  function calcOvulation() {
+    const lmpVal = document.getElementById('ovLMP').value;
+    const cycle  = parseInt(document.getElementById('ovCycle').value) || 28;
+    if (!lmpVal) { showToast('Please select your LMP date.', 'warn'); return; }
+
+    const lmp  = new Date(lmpVal);
+    const ovDay = cycle - 14;
+    const ov   = new Date(lmp); ov.setDate(ov.getDate() + ovDay);
+
+    const fertStart = new Date(ov); fertStart.setDate(ov.getDate() - 5);
+    const fertEnd   = new Date(ov); fertEnd.setDate(ov.getDate() + 1);
+    const nextPeriod = new Date(lmp); nextPeriod.setDate(nextPeriod.getDate() + cycle);
+
+    const fmt = d => d.toLocaleDateString('en-US', { weekday:'short', month:'short', day:'numeric' });
+
+    document.getElementById('ovulationResult').classList.remove('hidden');
+    document.getElementById('ovDate').textContent = fmt(ov);
+
+    document.getElementById('ovGrid').innerHTML = `
+      <div class="result-item"><div class="result-item-label">Ovulation Date</div><div class="result-item-value" style="font-size:.95rem;">${fmt(ov)}</div></div>
+      <div class="result-item"><div class="result-item-label">Fertile Window</div><div class="result-item-value" style="font-size:.85rem;">${fmt(fertStart)} – ${fmt(fertEnd)}</div></div>
+      <div class="result-item"><div class="result-item-label">Next Period</div><div class="result-item-value" style="font-size:.95rem;">${fmt(nextPeriod)}</div></div>
+      <div class="result-item"><div class="result-item-label">Cycle Day (Ovulation)</div><div class="result-item-value">${ovDay}</div></div>
+    `;
+  }
+  </script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit Converter — Length, Weight, Temperature, Volume | Arithmex</title>
+  <meta name="description" content="Free online unit converter: length, weight, temperature, volume and more. Real-time conversions with no sign-up required." />
+  <meta name="keywords" content="unit converter, length converter, weight converter, temperature converter, volume converter, online converter" />
+  <link rel="canonical" href="https://yourusername.github.io/arithmex/calculators/unit-converter.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- GOOGLE ADSENSE -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo"><div class="logo-icon">A</div>Arithmex</a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="universal-calculator.html">Universal</a></li>
+          <li><a href="finance-calculator.html">Finance</a></li>
+          <li><a href="fitness-calculator.html">Fitness</a></li>
+          <li><a href="health-calculator.html">Health</a></li>
+          <li><a href="time-calculator.html">Time</a></li>
+          <li><a href="unit-converter.html" class="active">Converter</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span id="themeIcon">☀️</span></button>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- GOOGLE AD SPACE -->
+  <div class="container" style="padding-top:1rem;">
+    <div class="ad-space ad-space-leaderboard"><span class="ad-label">Advertisement</span><span>728×90 Leaderboard</span></div>
+  </div>
+  <!-- /GOOGLE AD SPACE -->
+
+  <main class="calc-page">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><span class="breadcrumb-sep">›</span><span>Unit Converter</span>
+      </div>
+      <div class="calc-page-header">
+        <h1 class="page-title"><span>📐</span> Unit Converter</h1>
+        <p class="page-desc">Real-time conversions for length, weight, temperature, volume, area, speed, data, and energy. Type to convert instantly.</p>
+      </div>
+
+      <div class="calc-layout">
+        <div class="calc-main">
+
+          <div class="panel" data-tabs>
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="tab-length">Length</button>
+              <button class="tab-btn" data-tab="tab-weight">Weight</button>
+              <button class="tab-btn" data-tab="tab-temp">Temperature</button>
+              <button class="tab-btn" data-tab="tab-volume">Volume</button>
+              <button class="tab-btn" data-tab="tab-area">Area</button>
+              <button class="tab-btn" data-tab="tab-speed">Speed</button>
+              <button class="tab-btn" data-tab="tab-data">Data</button>
+            </div>
+
+            <!-- ── LENGTH ── -->
+            <div id="tab-length" class="tab-pane active">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Length Converter</h2>
+              <div class="converter-row">
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="lenValue">Value</label>
+                  <input class="form-control" type="number" id="lenValue" placeholder="Enter value" oninput="convertLength()" />
+                </div>
+                <div>
+                  <label class="form-label" style="visibility:hidden;">swap</label>
+                  <button class="swap-btn" onclick="swapUnits('lenFrom','lenTo','lenValue',convertLength)" title="Swap units">⇄</button>
+                </div>
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="lenFrom">From</label>
+                  <select class="form-control" id="lenFrom" onchange="convertLength()"></select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top:1rem;">
+                <label class="form-label" for="lenTo">To</label>
+                <select class="form-control" id="lenTo" onchange="convertLength()"></select>
+              </div>
+              <div id="lenResult" class="result-box info hidden" style="margin-top:1rem;">
+                <div class="result-label">Result</div>
+                <div class="result-value" id="lenOutput">—</div>
+                <div class="result-note" id="lenFactor"></div>
+              </div>
+              <div class="result-grid" id="lenAllGrid" style="margin-top:1rem;display:none;"></div>
+            </div>
+
+            <!-- ── WEIGHT ── -->
+            <div id="tab-weight" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Weight / Mass Converter</h2>
+              <div class="converter-row">
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="wtValue">Value</label>
+                  <input class="form-control" type="number" id="wtValue" placeholder="Enter value" oninput="convertWeight()" />
+                </div>
+                <div>
+                  <label class="form-label" style="visibility:hidden;">swap</label>
+                  <button class="swap-btn" onclick="swapUnits('wtFrom','wtTo','wtValue',convertWeight)" title="Swap units">⇄</button>
+                </div>
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="wtFrom">From</label>
+                  <select class="form-control" id="wtFrom" onchange="convertWeight()"></select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top:1rem;">
+                <label class="form-label" for="wtTo">To</label>
+                <select class="form-control" id="wtTo" onchange="convertWeight()"></select>
+              </div>
+              <div id="wtResult" class="result-box info hidden" style="margin-top:1rem;">
+                <div class="result-label">Result</div>
+                <div class="result-value" id="wtOutput">—</div>
+                <div class="result-note" id="wtFactor"></div>
+              </div>
+            </div>
+
+            <!-- ── TEMPERATURE ── -->
+            <div id="tab-temp" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Temperature Converter</h2>
+              <div class="form-group">
+                <label class="form-label" for="tempValue">Temperature Value</label>
+                <input class="form-control" type="number" id="tempValue" placeholder="Enter temperature" oninput="convertTemp()" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="tempFrom">From Unit</label>
+                <select class="form-control" id="tempFrom" onchange="convertTemp()">
+                  <option value="C">Celsius (°C)</option>
+                  <option value="F">Fahrenheit (°F)</option>
+                  <option value="K">Kelvin (K)</option>
+                  <option value="R">Rankine (°R)</option>
+                </select>
+              </div>
+              <div id="tempResult" class="hidden" style="margin-top:1rem;">
+                <div class="result-grid" id="tempGrid"></div>
+              </div>
+            </div>
+
+            <!-- ── VOLUME ── -->
+            <div id="tab-volume" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Volume Converter</h2>
+              <div class="converter-row">
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="volValue">Value</label>
+                  <input class="form-control" type="number" id="volValue" placeholder="Enter value" oninput="convertVolume()" />
+                </div>
+                <div>
+                  <label class="form-label" style="visibility:hidden;">swap</label>
+                  <button class="swap-btn" onclick="swapUnits('volFrom','volTo','volValue',convertVolume)" title="Swap units">⇄</button>
+                </div>
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="volFrom">From</label>
+                  <select class="form-control" id="volFrom" onchange="convertVolume()"></select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top:1rem;">
+                <label class="form-label" for="volTo">To</label>
+                <select class="form-control" id="volTo" onchange="convertVolume()"></select>
+              </div>
+              <div id="volResult" class="result-box info hidden" style="margin-top:1rem;">
+                <div class="result-label">Result</div>
+                <div class="result-value" id="volOutput">—</div>
+                <div class="result-note" id="volFactor"></div>
+              </div>
+            </div>
+
+            <!-- ── AREA ── -->
+            <div id="tab-area" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Area Converter</h2>
+              <div class="converter-row">
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="areaValue">Value</label>
+                  <input class="form-control" type="number" id="areaValue" placeholder="Enter value" oninput="convertArea()" />
+                </div>
+                <div>
+                  <label class="form-label" style="visibility:hidden;">swap</label>
+                  <button class="swap-btn" onclick="swapUnits('areaFrom','areaTo','areaValue',convertArea)" title="Swap units">⇄</button>
+                </div>
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="areaFrom">From</label>
+                  <select class="form-control" id="areaFrom" onchange="convertArea()"></select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top:1rem;">
+                <label class="form-label" for="areaTo">To</label>
+                <select class="form-control" id="areaTo" onchange="convertArea()"></select>
+              </div>
+              <div id="areaResult" class="result-box info hidden" style="margin-top:1rem;">
+                <div class="result-label">Result</div>
+                <div class="result-value" id="areaOutput">—</div>
+                <div class="result-note" id="areaFactor"></div>
+              </div>
+            </div>
+
+            <!-- ── SPEED ── -->
+            <div id="tab-speed" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Speed Converter</h2>
+              <div class="converter-row">
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="speedValue">Value</label>
+                  <input class="form-control" type="number" id="speedValue" placeholder="Enter value" oninput="convertSpeed()" />
+                </div>
+                <div>
+                  <label class="form-label" style="visibility:hidden;">swap</label>
+                  <button class="swap-btn" onclick="swapUnits('speedFrom','speedTo','speedValue',convertSpeed)" title="Swap units">⇄</button>
+                </div>
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="speedFrom">From</label>
+                  <select class="form-control" id="speedFrom" onchange="convertSpeed()"></select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top:1rem;">
+                <label class="form-label" for="speedTo">To</label>
+                <select class="form-control" id="speedTo" onchange="convertSpeed()"></select>
+              </div>
+              <div id="speedResult" class="result-box info hidden" style="margin-top:1rem;">
+                <div class="result-label">Result</div>
+                <div class="result-value" id="speedOutput">—</div>
+                <div class="result-note" id="speedFactor"></div>
+              </div>
+            </div>
+
+            <!-- ── DATA ── -->
+            <div id="tab-data" class="tab-pane">
+              <h2 class="panel-title" style="margin-bottom:1.5rem;">Data Storage Converter</h2>
+              <div class="converter-row">
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="dataValue">Value</label>
+                  <input class="form-control" type="number" id="dataValue" placeholder="Enter value" oninput="convertData()" />
+                </div>
+                <div>
+                  <label class="form-label" style="visibility:hidden;">swap</label>
+                  <button class="swap-btn" onclick="swapUnits('dataFrom','dataTo','dataValue',convertData)" title="Swap units">⇄</button>
+                </div>
+                <div class="form-group" style="margin:0">
+                  <label class="form-label" for="dataFrom">From</label>
+                  <select class="form-control" id="dataFrom" onchange="convertData()"></select>
+                </div>
+              </div>
+              <div class="form-group" style="margin-top:1rem;">
+                <label class="form-label" for="dataTo">To</label>
+                <select class="form-control" id="dataTo" onchange="convertData()"></select>
+              </div>
+              <div id="dataResult" class="result-box info hidden" style="margin-top:1rem;">
+                <div class="result-label">Result</div>
+                <div class="result-value" id="dataOutput">—</div>
+                <div class="result-note" id="dataFactor"></div>
+              </div>
+            </div>
+
+          </div><!-- /panel -->
+
+          <!-- GOOGLE AD SPACE -->
+          <div class="ad-space ad-space-rectangle"><span class="ad-label">Advertisement</span><span>300×250 Rectangle</span></div>
+          <!-- /GOOGLE AD SPACE -->
+
+        </div><!-- /calc-main -->
+
+        <div class="calc-sidebar">
+          <div class="panel">
+            <div class="panel-header"><span class="panel-title">⚡ Quick Reference</span></div>
+            <div class="panel-body">
+              <ul class="footer-links" style="gap:.5rem;">
+                <li class="text-sm text-muted">1 mile = 1.60934 km</li>
+                <li class="text-sm text-muted">1 kg = 2.20462 lbs</li>
+                <li class="text-sm text-muted">°F = °C × 9/5 + 32</li>
+                <li class="text-sm text-muted">1 gallon = 3.78541 L</li>
+                <li class="text-sm text-muted">1 inch = 2.54 cm</li>
+                <li class="text-sm text-muted">1 oz = 28.3495 g</li>
+                <li class="text-sm text-muted">1 acre = 4047 m²</li>
+                <li class="text-sm text-muted">1 GB = 1024 MB</li>
+              </ul>
+            </div>
+          </div>
+          <!-- GOOGLE AD SPACE -->
+          <div class="ad-space ad-space-sidebar"><span class="ad-label">Advertisement</span><span>300×600 Sidebar</span></div>
+          <!-- /GOOGLE AD SPACE -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <a href="../index.html" class="logo" style="font-size:1rem;"><div class="logo-icon" style="width:28px;height:28px;font-size:.9rem;">A</div>Arithmex</a>
+        <span class="text-muted text-sm">© 2025 Arithmex — Free Online Calculators</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+  'use strict';
+
+  /* ══ Unit Definitions (all relative to base unit in meters/kg/L/etc) ══ */
+
+  const UNITS = {
+    length: {
+      label: 'Length',
+      base: 'meter',
+      units: {
+        meter:       { name: 'Meter (m)',           toBase: 1 },
+        kilometer:   { name: 'Kilometer (km)',       toBase: 1000 },
+        centimeter:  { name: 'Centimeter (cm)',      toBase: 0.01 },
+        millimeter:  { name: 'Millimeter (mm)',      toBase: 0.001 },
+        micrometer:  { name: 'Micrometer (µm)',      toBase: 1e-6 },
+        nanometer:   { name: 'Nanometer (nm)',       toBase: 1e-9 },
+        mile:        { name: 'Mile (mi)',             toBase: 1609.344 },
+        yard:        { name: 'Yard (yd)',             toBase: 0.9144 },
+        foot:        { name: 'Foot (ft)',             toBase: 0.3048 },
+        inch:        { name: 'Inch (in)',             toBase: 0.0254 },
+        nauticalMile:{ name: 'Nautical Mile (nmi)',  toBase: 1852 },
+        lightYear:   { name: 'Light Year (ly)',      toBase: 9.461e15 },
+      }
+    },
+    weight: {
+      label: 'Weight',
+      base: 'kilogram',
+      units: {
+        kilogram:  { name: 'Kilogram (kg)',       toBase: 1 },
+        gram:      { name: 'Gram (g)',            toBase: 0.001 },
+        milligram: { name: 'Milligram (mg)',       toBase: 1e-6 },
+        tonne:     { name: 'Metric Ton (t)',      toBase: 1000 },
+        pound:     { name: 'Pound (lb)',          toBase: 0.453592 },
+        ounce:     { name: 'Ounce (oz)',          toBase: 0.0283495 },
+        stone:     { name: 'Stone (st)',          toBase: 6.35029 },
+        usTon:     { name: 'US Short Ton',        toBase: 907.185 },
+        imperialTon:{ name:'Imperial Ton',        toBase: 1016.05 },
+        carat:     { name: 'Carat (ct)',          toBase: 0.0002 },
+      }
+    },
+    volume: {
+      label: 'Volume',
+      base: 'liter',
+      units: {
+        liter:       { name: 'Liter (L)',             toBase: 1 },
+        milliliter:  { name: 'Milliliter (mL)',        toBase: 0.001 },
+        cubicMeter:  { name: 'Cubic Meter (m³)',       toBase: 1000 },
+        cubicCm:     { name: 'Cubic Centimeter (cm³)', toBase: 0.001 },
+        usGallon:    { name: 'US Gallon (gal)',         toBase: 3.78541 },
+        usQuart:     { name: 'US Quart (qt)',           toBase: 0.946353 },
+        usPint:      { name: 'US Pint (pt)',            toBase: 0.473176 },
+        usCup:       { name: 'US Cup',                 toBase: 0.236588 },
+        usFlOz:      { name: 'US Fl. Ounce (fl oz)',   toBase: 0.0295735 },
+        usTablespoon:{ name: 'US Tablespoon (tbsp)',   toBase: 0.0147868 },
+        usTeaspoon:  { name: 'US Teaspoon (tsp)',      toBase: 0.00492892 },
+        imperialGal: { name: 'Imperial Gallon',        toBase: 4.54609 },
+        imperialPint:{ name: 'Imperial Pint',          toBase: 0.568261 },
+        imperialFlOz:{ name: 'Imperial Fl. Oz',        toBase: 0.0284131 },
+        cubicInch:   { name: 'Cubic Inch (in³)',        toBase: 0.0163871 },
+        cubicFoot:   { name: 'Cubic Foot (ft³)',        toBase: 28.3168 },
+      }
+    },
+    area: {
+      label: 'Area',
+      base: 'squareMeter',
+      units: {
+        squareMeter:    { name: 'Square Meter (m²)',      toBase: 1 },
+        squareKm:       { name: 'Square Kilometer (km²)', toBase: 1e6 },
+        squareCm:       { name: 'Square Centimeter',      toBase: 1e-4 },
+        squareMm:       { name: 'Square Millimeter',      toBase: 1e-6 },
+        hectare:        { name: 'Hectare (ha)',            toBase: 10000 },
+        acre:           { name: 'Acre',                   toBase: 4046.86 },
+        squareMile:     { name: 'Square Mile',            toBase: 2.59e6 },
+        squareYard:     { name: 'Square Yard (yd²)',       toBase: 0.836127 },
+        squareFoot:     { name: 'Square Foot (ft²)',       toBase: 0.092903 },
+        squareInch:     { name: 'Square Inch (in²)',       toBase: 0.00064516 },
+      }
+    },
+    speed: {
+      label: 'Speed',
+      base: 'meterPerSec',
+      units: {
+        meterPerSec:   { name: 'Meter/Second (m/s)',     toBase: 1 },
+        kmPerHour:     { name: 'Kilometer/Hour (km/h)',  toBase: 1/3.6 },
+        milePerHour:   { name: 'Mile/Hour (mph)',         toBase: 0.44704 },
+        footPerSec:    { name: 'Foot/Second (ft/s)',     toBase: 0.3048 },
+        knot:          { name: 'Knot (kn)',               toBase: 0.514444 },
+        mach:          { name: 'Mach (at sea level)',    toBase: 343 },
+        lightSpeed:    { name: 'Speed of Light (c)',     toBase: 299792458 },
+      }
+    },
+    data: {
+      label: 'Data',
+      base: 'byte',
+      units: {
+        bit:      { name: 'Bit (b)',        toBase: 0.125 },
+        byte:     { name: 'Byte (B)',       toBase: 1 },
+        kilobyte: { name: 'Kilobyte (KB)',  toBase: 1024 },
+        megabyte: { name: 'Megabyte (MB)',  toBase: 1024**2 },
+        gigabyte: { name: 'Gigabyte (GB)',  toBase: 1024**3 },
+        terabyte: { name: 'Terabyte (TB)',  toBase: 1024**4 },
+        petabyte: { name: 'Petabyte (PB)',  toBase: 1024**5 },
+        kilobit:  { name: 'Kilobit (Kb)',  toBase: 125 },
+        megabit:  { name: 'Megabit (Mb)',  toBase: 125000 },
+        gigabit:  { name: 'Gigabit (Gb)',  toBase: 1.25e8 },
+      }
+    },
+  };
+
+  /* ── Generic converter ── */
+  function makeConverter(category, prefix) {
+    const def = UNITS[category];
+    const fromEl  = document.getElementById(prefix + 'From');
+    const toEl    = document.getElementById(prefix + 'To');
+    const valEl   = document.getElementById(prefix + 'Value');
+    const resDiv  = document.getElementById(prefix + 'Result');
+    const outEl   = document.getElementById(prefix + 'Output');
+    const factEl  = document.getElementById(prefix + 'Factor');
+
+    // Populate selects
+    Object.entries(def.units).forEach(([key, { name }]) => {
+      fromEl.add(new Option(name, key));
+      toEl.add(new Option(name, key));
+    });
+
+    // Default selection
+    const keys = Object.keys(def.units);
+    fromEl.value = keys[0];
+    toEl.value   = keys[1];
+
+    return function() {
+      const val  = parseFloat(valEl.value);
+      const from = fromEl.value;
+      const to   = toEl.value;
+      if (isNaN(val)) { resDiv.classList.add('hidden'); return; }
+
+      const inBase = val * def.units[from].toBase;
+      const result = inBase / def.units[to].toBase;
+      const factor = def.units[from].toBase / def.units[to].toBase;
+
+      resDiv.classList.remove('hidden');
+      outEl.textContent  = formatResult(result) + ' ' + def.units[to].name;
+      factEl.textContent = `1 ${def.units[from].name} = ${formatResult(factor)} ${def.units[to].name}`;
+    };
+  }
+
+  function formatResult(n) {
+    if (Math.abs(n) >= 1e9 || (Math.abs(n) < 1e-4 && n !== 0)) {
+      return n.toExponential(6);
+    }
+    if (Number.isInteger(n)) return n.toLocaleString();
+    return parseFloat(n.toPrecision(8)).toLocaleString('en-US', { maximumFractionDigits: 8 });
+  }
+
+  /* ── Temperature (special case — not linear) ── */
+  function convertTemp() {
+    const val  = parseFloat(document.getElementById('tempValue').value);
+    const from = document.getElementById('tempFrom').value;
+    if (isNaN(val)) { document.getElementById('tempResult').classList.add('hidden'); return; }
+
+    // Convert all to Celsius first
+    let c;
+    if      (from === 'C') c = val;
+    else if (from === 'F') c = (val - 32) * 5 / 9;
+    else if (from === 'K') c = val - 273.15;
+    else if (from === 'R') c = (val - 491.67) * 5 / 9;
+
+    const results = [
+      { label: 'Celsius (°C)',     val: c,                cls: '' },
+      { label: 'Fahrenheit (°F)', val: c * 9/5 + 32,     cls: '' },
+      { label: 'Kelvin (K)',       val: c + 273.15,        cls: '' },
+      { label: 'Rankine (°R)',     val: (c + 273.15)*9/5, cls: '' },
+    ];
+
+    document.getElementById('tempResult').classList.remove('hidden');
+    document.getElementById('tempGrid').innerHTML = results.map(({ label, val }) => `
+      <div class="result-item">
+        <div class="result-item-label">${label}</div>
+        <div class="result-item-value">${formatResult(val)}</div>
+      </div>
+    `).join('');
+  }
+
+  /* ── Swap ── */
+  function swapUnits(fromId, toId, valId, convertFn) {
+    const from = document.getElementById(fromId);
+    const to   = document.getElementById(toId);
+    [from.value, to.value] = [to.value, from.value];
+    convertFn();
+  }
+
+  /* ── Init ── */
+  let convertLength, convertWeight, convertVolume, convertArea, convertSpeed, convertData;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    convertLength = makeConverter('length', 'len');
+    convertWeight = makeConverter('weight', 'wt');
+    convertVolume = makeConverter('volume', 'vol');
+    convertArea   = makeConverter('area',   'area');
+    convertSpeed  = makeConverter('speed',  'speed');
+    convertData   = makeConverter('data',   'data');
+  });
+  </script>
+</body>
+</html>
