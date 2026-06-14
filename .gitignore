@@ -12,8 +12,7 @@ ui-debug.log
 *.secret
 *.key
 
-# Ads config (AdSense publisher IDs stay local only)
-ads.txt
+# Ads config
 ads-config.js
 
 # OS / editor noise
